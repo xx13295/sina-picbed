@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <property name="LEVEL" value="DEBUG"/>
+    <property name="PATTERN-1" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
+    <property name="PATTERN-2" value="[%-5p][%thread][%d{yyy-MM-dd HH:mm:ss}][%C %M][%L] %m%n"/>
+
+
+    <appender name="ROOT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${PATTERN-2}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <target>System.out</target>
+    </appender>
+
+    <root level="${LEVEL}">
+        <appender-ref ref="ROOT"/>
+    </root>
+</configuration>
