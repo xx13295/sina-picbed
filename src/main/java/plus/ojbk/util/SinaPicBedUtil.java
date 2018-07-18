@@ -72,16 +72,16 @@ public class SinaPicBedUtil {
 			httpPost.setConfig(requestConfig);
 			String fileName = null;
 			String prefix = null;
-			File excelFile = null;
+			File piclFile = null;
 			for(MultipartFile multipartFile:multipartFiles) {
 				if(!GeneralUtils.isImage(multipartFile.getInputStream())) {
 					throw new ServiceException("兄dei,只能上传图片文件~");
 				}
 				fileName = multipartFile.getOriginalFilename();
 		        fileName.substring(fileName.lastIndexOf("."));
-		        excelFile = File.createTempFile(GeneralUtils.getLowerUUID(), prefix);
-		        multipartFile.transferTo(excelFile);
-		        FileBody bin = new FileBody(excelFile);
+		        piclFile = File.createTempFile(GeneralUtils.getLowerUUID(), prefix);
+		        multipartFile.transferTo(piclFile);
+		        FileBody bin = new FileBody(piclFile);
 				HttpEntity reqEntity = MultipartEntityBuilder.create().addPart("pic1", bin).build();
 				httpPost.addHeader("Cookie", cookies);
 				httpPost.setHeader(new BasicHeader("Charset", "UTF-8"));
@@ -113,7 +113,7 @@ public class SinaPicBedUtil {
 					}
 					EntityUtils.consume(resEntity);
 				} finally {
-					deleteFile(excelFile);
+					deleteFile(piclFile);
 					response.close();
 				}
 			}
